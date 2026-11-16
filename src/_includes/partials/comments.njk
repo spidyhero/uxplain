@@ -1,0 +1,19 @@
+<div class="cbox" data-comments>
+  <ol class="clist" data-clist aria-live="polite"></ol>
+  <p class="muted small" data-cempty hidden>ยังไม่มีคอมเมนต์ มาเป็นคนแรกกัน!</p>
+
+  <form class="cform" data-cform hidden>
+    <div class="cform-row">
+      <input name="name" maxlength="40" required placeholder="ชื่อเล่น" aria-label="ชื่อเล่น" autocomplete="nickname">
+    </div>
+    <textarea name="body" minlength="2" maxlength="1000" required rows="3" placeholder="พิมพ์ความเห็น คำถาม หรือให้กำลังใจ…" aria-label="ข้อความ"></textarea>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="cform-foot">
+      <span class="muted small"><span data-ccount>0</span>/1000 · ไม่ต้องล็อกอิน · สุภาพกันนะ</span>
+      <button class="btn btn-ink btn-sm" type="submit">ส่งความเห็น</button>
+    </div>
+    <p class="cmsg small" data-cmsg role="status"></p>
+  </form>
+
+  <div class="notice" data-coff>ระบบคอมเมนต์ยังไม่ได้เชื่อมต่อ — ใส่ค่า <code>supabase.url</code> / <code>supabase.anonKey</code> ใน <code>src/_data/site.json</code></div>
+</div>

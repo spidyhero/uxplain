@@ -24,5 +24,9 @@
     "categoryId": "",
     "boardCategory": "Q&A",
     "boardCategoryId": ""
+  },
+  "supabase": {
+    "url": "",
+    "anonKey": ""
   }
 }

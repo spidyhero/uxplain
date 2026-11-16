@@ -27,12 +27,18 @@ layout: layouts/base.njk
 
 {% set videos = collections.posts | byType("video") %}
 {% set articles = collections.posts | byType("article") %}
+<template id="all-cards">{% for post in collections.posts %}{% include "partials/card.njk" %}{% endfor %}</template>
 
 <section class="wrap block">
   <div class="block-head"><h2>คลิปล่าสุด</h2><a href="{{ '/videos/' | url }}">ดูทั้งหมด →</a></div>
   {% if videos.length %}
   <div class="grid grid-video">{% for post in videos | limit(4) %}{% include "partials/card.njk" %}{% endfor %}</div>
   {% else %}<p class="muted">ยังไม่มีคลิป</p>{% endif %}
+</section>
+
+<section class="wrap block" data-popular hidden>
+  <div class="block-head"><h2>🔥 ยอดนิยม</h2><span class="muted small">จากยอดโหวตของคนดู</span></div>
+  <div class="grid" data-popular-grid></div>
 </section>
 
 <section class="wrap block">

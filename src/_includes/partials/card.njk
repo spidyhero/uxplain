@@ -1,6 +1,6 @@
 {# ต้องมีตัวแปร post #}
 {% set pl = post.data.pillar | pillar %}
-<article class="card {{ 'card-video' if post.data.type == 'video' else 'card-article' }}" data-pillar="{{ pl.key }}" data-type="{{ post.data.type }}">
+<article class="card {{ 'card-video' if post.data.type == 'video' else 'card-article' }}" data-pillar="{{ pl.key }}" data-type="{{ post.data.type }}" data-slug="{{ post.page.fileSlug }}" data-date="{{ post.date | isoDate }}">
   <a class="card-link" href="{{ post.url | url }}">
     <div class="card-media" style="--pc: {{ pl.color }}">
       {% if post.data.type == "video" and post.data.youtube %}
@@ -20,7 +20,10 @@
       </div>
       <h3>{{ post.data.title }}</h3>
       {% if post.data.excerpt %}<p>{{ post.data.excerpt }}</p>{% endif %}
-      <time datetime="{{ post.date | isoDate }}">{{ post.date | thaiDate }}</time>
+      <div class="card-foot">
+        <time datetime="{{ post.date | isoDate }}">{{ post.date | thaiDate }}</time>
+        <span class="stats" aria-label="ยอดกด" hidden><span>❤️ <b data-n="cheers">0</b></span><span>👍 <b data-n="votes">0</b></span><span>💬 <b data-n="comments">0</b></span></span>
+      </div>
     </div>
   </a>
 </article>

@@ -1,0 +1,10 @@
+<div class="reactbar" data-reactbar>
+  <button class="rb rb-cheer" data-react="cheer" aria-pressed="false" disabled>
+    <span class="rb-ico" aria-hidden="true">❤️</span><span class="rb-label">ให้กำลังใจ</span><b data-n="cheers">·</b>
+  </button>
+  <button class="rb rb-vote" data-react="vote" aria-pressed="false" disabled>
+    <span class="rb-ico" aria-hidden="true">👍</span><span class="rb-label">โหวต{{ "คลิป" if type == "video" else "บทความ" }}นี้</span><b data-n="votes">·</b>
+  </button>
+  <a class="rb rb-comment" href="#comments"><span class="rb-ico" aria-hidden="true">💬</span><span class="rb-label">คอมเมนต์</span><b data-n="comments">·</b></a>
+  <button class="rb rb-share" data-share><span class="rb-ico" aria-hidden="true">🔗</span><span class="rb-label">แชร์</span></button>
+</div>

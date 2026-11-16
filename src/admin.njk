@@ -1,0 +1,88 @@
+---
+layout: layouts/base.njk
+title: ผู้ดูแล
+permalink: /admin/
+eleventyExcludeFromCollections: true
+---
+<section class="wrap-narrow block page-head admin">
+  <h1>หลังบ้าน UXplain 🛠️</h1>
+  <p class="muted">อนุมัติ / ซ่อน / ลบคอมเมนต์ (เฉพาะอีเมลที่อยู่ในตาราง <code>admins</code>)</p>
+
+  <form class="admin-login" data-login hidden>
+    <input type="email" name="email" required placeholder="อีเมลผู้ดูแล" aria-label="อีเมล" autocomplete="email">
+    <button class="btn btn-ink btn-sm">ส่งลิงก์เข้าสู่ระบบ</button>
+    <p class="small muted" data-lmsg></p>
+  </form>
+
+  <div data-panel hidden>
+    <div class="admin-bar">
+      <span data-who class="small"></span>
+      <label class="small"><input type="checkbox" data-auto> อนุมัติอัตโนมัติ (ข้อความที่มีลิงก์เกิน 1 อันยังต้องรออนุมัติ)</label>
+      <button class="btn btn-line btn-sm" data-logout>ออกจากระบบ</button>
+    </div>
+    <div class="filters" role="tablist">
+      <button class="f on" data-tab="pending">รออนุมัติ <b data-pcount></b></button>
+      <button class="f" data-tab="approved">แสดงอยู่</button>
+      <button class="f" data-tab="rejected">ซ่อนไว้</button>
+    </div>
+    <ol class="admin-list" data-list></ol>
+    <p class="muted" data-empty hidden>ไม่มีรายการ</p>
+  </div>
+  <div class="notice" data-off hidden>ยังไม่ได้ตั้งค่า Supabase ใน <code>src/_data/site.json</code></div>
+</section>
+
+<script type="module">
+import { enabled, rpc, auth } from "{{ '/assets/js/sb.js' | url }}";
+const $ = (s) => document.querySelector(s);
+if (!enabled) { $("[data-off]").hidden = false; }
+else {
+  let tab = "pending";
+  const urlErr = auth.captureFromUrl();
+  const showLogin = (m = "") => { $("[data-login]").hidden = false; $("[data-panel]").hidden = true; $("[data-lmsg]").textContent = m; };
+  const call = async (fn, args) => rpc(fn, args, await auth.token());
+
+  $("[data-login]").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    try { await auth.sendLink(e.target.email.value.trim(), location.href.split("#")[0]);
+      $("[data-lmsg]").textContent = "ส่งลิงก์ไปที่อีเมลแล้ว เปิดอีเมลแล้วกดลิงก์เพื่อเข้าสู่ระบบ (ลิงก์ใช้ได้ครั้งเดียว)"; }
+    catch (err) { $("[data-lmsg]").textContent = "ส่งไม่สำเร็จ: " + err.message; }
+  });
+  $("[data-logout]").addEventListener("click", async () => { await auth.signOut(); showLogin(); });
+
+  async function load() {
+    let st;
+    try { st = await call("admin_settings", {}); }
+    catch (e) { return showLogin(/not_admin/.test(e.message) ? "อีเมลนี้ยังไม่ได้อยู่ในตาราง admins" : e.message); }
+    $("[data-login]").hidden = true; $("[data-panel]").hidden = false;
+    $("[data-auto]").checked = st[0].auto_approve;
+    $("[data-pcount]").textContent = st[0].pending ? `(${st[0].pending})` : "";
+    const data = await call("admin_list_comments", { p_status: tab });
+    const list = $("[data-list]"); list.replaceChildren();
+    for (const c of data) {
+      const li = document.createElement("li");
+      const meta = document.createElement("p"); meta.className = "small muted";
+      const code = document.createElement("code"); code.textContent = c.post_slug;
+      meta.append(new Date(c.created_at).toLocaleString("th-TH") + " · ", code);
+      const who = document.createElement("b"); who.textContent = c.name;
+      const body = document.createElement("p"); body.textContent = c.body;
+      const acts = document.createElement("div"); acts.className = "acts";
+      const btn = (label, st, cls) => { const b = document.createElement("button"); b.className = "btn btn-sm " + cls; b.textContent = label;
+        b.onclick = async () => { if (st === "delete" && !confirm("ลบถาวร?")) return;
+          try { await call("admin_set_status", { p_id: c.id, p_status: st }); } catch (e) { alert(e.message); } load(); }; return b; };
+      if (c.status !== "approved") acts.append(btn("✅ อนุมัติ", "approved", "btn-ink"));
+      if (c.status !== "rejected") acts.append(btn("🙈 ซ่อน", "rejected", "btn-line"));
+      acts.append(btn("🗑️ ลบ", "delete", "btn-line"));
+      li.append(meta, who, body, acts); list.append(li);
+    }
+    $("[data-empty]").hidden = data.length > 0;
+  }
+  $("[data-auto]").addEventListener("change", async (e) => { await call("admin_settings", { p_auto_approve: e.target.checked }); load(); });
+  document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => {
+    tab = b.dataset.tab; document.querySelectorAll("[data-tab]").forEach((x) => x.classList.toggle("on", x === b)); load();
+  }));
+
+  const t = await auth.token();
+  if (!t) showLogin(urlErr || "");
+  else { try { $("[data-who]").textContent = (await auth.user(t)).email; } catch {} load(); }
+}
+</script>

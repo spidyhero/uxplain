@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 ---
 {% set pl = pillar | pillar %}
-<article class="post wrap-narrow">
+<article class="post wrap-narrow" data-post-slug="{{ page.fileSlug }}">
   <header class="post-head">
     <div class="meta">
       <a class="chip" style="--pc: {{ pl.color }}" href="{{ ('/topics/' + pl.key + '/') | url }}">{{ pl.th }}</a>
@@ -16,6 +16,7 @@ layout: layouts/base.njk
   </header>
 
   {% if type == "video" %}{% include "partials/video.njk" %}{% endif %}
+  {% include "partials/reactbar.njk" %}
 
   <div class="prose">
     {{ content | safe }}
@@ -32,11 +33,13 @@ layout: layouts/base.njk
   <p class="tags">{% for t in tags %}{% if t != "posts" %}<span>#{{ t }}</span>{% endif %}{% endfor %}</p>
   {% endif %}
 
-  <section class="comments">
-    <h2>คุยกันหน่อย 💬</h2>
+  {% include "partials/reactbar.njk" %}
+
+  <section class="comments" id="comments">
+    <h2>คุยกันหน่อย 💬 <small class="muted" data-comment-count></small></h2>
     {% if question %}<p class="question">{{ question }}</p>{% endif %}
-    {% set gTerm = "" %}{% set gCategory = site.giscus.category %}{% set gCategoryId = site.giscus.categoryId %}
-    {% include "partials/giscus.njk" %}
+    {% include "partials/comments.njk" %}
+    <p class="muted small">อยากถามยาว ๆ หรือตั้งกระทู้ใหม่? ไปที่ <a href="{{ '/community/' | url }}">บอร์ดคอมมูนิตี้</a></p>
   </section>
 
   {% set related = collections.posts | byPillar(pillar) %}

@@ -11,7 +11,12 @@ permalink: /articles/
     <button class="f on" data-f="all">ทั้งหมด</button>
     {% for p in pillars %}<button class="f" data-f="{{ p.key }}" style="--pc: {{ p.color }}">{{ p.th }}</button>{% endfor %}
   </div>
-  <input class="search" type="search" placeholder="ค้นหา…" aria-label="ค้นหา">
+  <div class="list-tools">
+    <input class="search" type="search" placeholder="ค้นหา…" aria-label="ค้นหา">
+    <label class="sort" hidden>เรียงตาม
+      <select data-sort><option value="new">ล่าสุด</option><option value="votes">ยอดโหวต 👍</option><option value="cheers">กำลังใจ ❤️</option></select>
+    </label>
+  </div>
   <div class="grid" data-filterable>
     {% for post in list %}{% include "partials/card.njk" %}{% endfor %}
   </div>
