@@ -1,0 +1,51 @@
+---
+layout: layouts/base.njk
+---
+{% set pl = pillar | pillar %}
+<article class="post wrap-narrow">
+  <header class="post-head">
+    <div class="meta">
+      <a class="chip" style="--pc: {{ pl.color }}" href="{{ ('/topics/' + pl.key + '/') | url }}">{{ pl.th }}</a>
+      <span class="kind">{{ "คลิป" if type == "video" else "บทความ" }}{% if episode %} · EP{{ episode }}{% endif %}</span>
+    </div>
+    <h1>{{ title }}</h1>
+    {% if excerpt %}<p class="lede">{{ excerpt }}</p>{% endif %}
+    <p class="muted small"><time datetime="{{ page.date | isoDate }}">{{ page.date | thaiDate }}</time>
+      {% if type != "video" %} · อ่าน {{ content | readMinutes }} นาที{% endif %}
+      {% if author %} · โดย {{ author }}{% endif %}</p>
+  </header>
+
+  {% if type == "video" %}{% include "partials/video.njk" %}{% endif %}
+
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+
+  {% if source %}
+  <aside class="source">
+    <h2>📄 งานวิจัยต้นฉบับ</h2>
+    <p>{{ source.cite }}{% if source.url %} <a href="{{ source.url }}" rel="noopener">{{ source.url | replace("https://", "") }}</a>{% endif %}</p>
+  </aside>
+  {% endif %}
+
+  {% if tags %}
+  <p class="tags">{% for t in tags %}{% if t != "posts" %}<span>#{{ t }}</span>{% endif %}{% endfor %}</p>
+  {% endif %}
+
+  <section class="comments">
+    <h2>คุยกันหน่อย 💬</h2>
+    {% if question %}<p class="question">{{ question }}</p>{% endif %}
+    {% set gTerm = "" %}{% set gCategory = site.giscus.category %}{% set gCategoryId = site.giscus.categoryId %}
+    {% include "partials/giscus.njk" %}
+  </section>
+
+  {% set related = collections.posts | byPillar(pillar) %}
+  {% if related.length > 1 %}
+  <section class="related">
+    <h2>เรื่องอื่นในหมวด {{ pl.th }}</h2>
+    <div class="grid">
+      {% for post in related | limit(4) %}{% if post.url != page.url %}{% include "partials/card.njk" %}{% endif %}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</article>

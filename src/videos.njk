@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: คลิปทั้งหมด
+permalink: /videos/
+---
+{% set list = collections.posts | byType("video") %}
+<section class="wrap block page-head">
+  <h1>คลิปทั้งหมด</h1>
+  <p class="muted">คลิป motion graphic สั้น ๆ ย่องานวิจัย UX/UI & HCI ให้เข้าใจใน 1 นาที</p>
+  <div class="filters" role="group" aria-label="กรองตามหมวด">
+    <button class="f on" data-f="all">ทั้งหมด</button>
+    {% for p in pillars %}<button class="f" data-f="{{ p.key }}" style="--pc: {{ p.color }}">{{ p.th }}</button>{% endfor %}
+  </div>
+  <input class="search" type="search" placeholder="ค้นหา…" aria-label="ค้นหา">
+  <div class="grid grid-video" data-filterable>
+    {% for post in list %}{% include "partials/card.njk" %}{% endfor %}
+  </div>
+  <p class="empty muted" hidden>ไม่พบโพสต์ที่ตรงกัน</p>
+</section>

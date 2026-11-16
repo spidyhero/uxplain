@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: บทความทั้งหมด
+permalink: /articles/
+---
+{% set list = collections.posts | byType("article") %}
+<section class="wrap block page-head">
+  <h1>บทความทั้งหมด</h1>
+  <p class="muted">อ่านเจาะลึกขึ้นอีกนิด พร้อมลิงก์งานวิจัยต้นฉบับ</p>
+  <div class="filters" role="group" aria-label="กรองตามหมวด">
+    <button class="f on" data-f="all">ทั้งหมด</button>
+    {% for p in pillars %}<button class="f" data-f="{{ p.key }}" style="--pc: {{ p.color }}">{{ p.th }}</button>{% endfor %}
+  </div>
+  <input class="search" type="search" placeholder="ค้นหา…" aria-label="ค้นหา">
+  <div class="grid" data-filterable>
+    {% for post in list %}{% include "partials/card.njk" %}{% endfor %}
+  </div>
+  <p class="empty muted" hidden>ไม่พบโพสต์ที่ตรงกัน</p>
+</section>

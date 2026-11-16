@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: หมวดทั้งหมด
+permalink: /topics/
+---
+<section class="wrap block page-head">
+  <h1>จากจอ ถึงสมอง</h1>
+  <p class="muted">การโต้ตอบระหว่างคนกับเทคโนโลยีไม่ได้มีแค่บนหน้าจอ เราแบ่งเรื่องเล่าออกเป็น 7 หมวด แต่ละหมวดมีมาสคอตประจำ</p>
+  <div class="pillars pillars-big">
+    {% for p in pillars %}
+    {% set n = (collections.posts | byPillar(p.key)).length %}
+    <a class="pillar" href="{{ ('/topics/' + p.key + '/') | url }}" style="--pc: {{ p.color }}">
+      <img src="{{ ('/assets/img/cast/' + p.mascot + '.svg') | url }}" alt="">
+      <b>{{ p.th }}</b><span>{{ p.en }}</span>
+      <small>{{ p.blurb }}</small>
+      <em>{{ n }} โพสต์</em>
+    </a>
+    {% endfor %}
+  </div>
+</section>

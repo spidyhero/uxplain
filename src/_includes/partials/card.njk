@@ -1,0 +1,26 @@
+{# ต้องมีตัวแปร post #}
+{% set pl = post.data.pillar | pillar %}
+<article class="card {{ 'card-video' if post.data.type == 'video' else 'card-article' }}" data-pillar="{{ pl.key }}" data-type="{{ post.data.type }}">
+  <a class="card-link" href="{{ post.url | url }}">
+    <div class="card-media" style="--pc: {{ pl.color }}">
+      {% if post.data.type == "video" and post.data.youtube %}
+        <img loading="lazy" src="https://i.ytimg.com/vi/{{ post.data.youtube | youtubeId }}/hqdefault.jpg" alt="">
+        <span class="play" aria-hidden="true">▶</span>
+      {% elif post.data.cover %}
+        <img loading="lazy" src="{{ post.data.cover | url }}" alt="">
+      {% else %}
+        <img class="mascot" loading="lazy" src="{{ ('/assets/img/cast/' + (post.data.mascot or pl.mascot) + '.svg') | url }}" alt="">
+        {% if post.data.type == "video" %}<span class="play" aria-hidden="true">▶</span>{% endif %}
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <div class="meta">
+        <span class="chip" style="--pc: {{ pl.color }}">{{ pl.th }}</span>
+        <span class="kind">{{ "คลิป" if post.data.type == "video" else "บทความ" }}{% if post.data.episode %} · EP{{ post.data.episode }}{% endif %}</span>
+      </div>
+      <h3>{{ post.data.title }}</h3>
+      {% if post.data.excerpt %}<p>{{ post.data.excerpt }}</p>{% endif %}
+      <time datetime="{{ post.date | isoDate }}">{{ post.date | thaiDate }}</time>
+    </div>
+  </a>
+</article>

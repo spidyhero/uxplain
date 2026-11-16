@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% set pageTitle = (title + " · " + site.title) if title else (site.title + " — " + site.slogan) %}
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ excerpt or site.description }}">
+  <meta property="og:title" content="{{ pageTitle }}">
+  <meta property="og:description" content="{{ excerpt or site.description }}">
+  <meta property="og:type" content="{{ 'article' if layout == 'layouts/post.njk' else 'website' }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url | url }}">
+  {% if type == "video" and youtube %}
+  <meta property="og:image" content="https://i.ytimg.com/vi/{{ youtube | youtubeId }}/hqdefault.jpg">
+  {% else %}
+  <meta property="og:image" content="{{ site.url }}{{ (cover or '/assets/img/cover.png') | url }}">
+  {% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="{{ '/assets/img/favicon.svg' | url }}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
+</head>
+<body>
+  <a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="{{ '/' | url }}" aria-label="UXplain หน้าแรก">
+        <img src="{{ '/assets/img/logo-mark.svg' | url }}" alt="" width="52" height="36">
+        <span>plain</span>
+      </a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav">เมนู</button>
+      <nav id="nav" class="nav">
+        {% set links = [["/", "หน้าแรก"], ["/videos/", "คลิป"], ["/articles/", "บทความ"], ["/topics/", "หมวด"], ["/community/", "คอมมูนิตี้"], ["/about/", "เกี่ยวกับ"]] %}
+        {% for l in links %}
+        <a href="{{ l[0] | url }}" {% if page.url == l[0] or (l[0] != "/" and page.url.startsWith(l[0])) %}aria-current="page"{% endif %}>{{ l[1] }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-in">
+      <div>
+        <img src="{{ '/assets/img/logo-mark.svg' | url }}" alt="" width="64" height="44">
+        <p class="foot-slogan">{{ site.slogan | replace(" x ", " <b class='x'>x</b> ") | safe }}</p>
+        <p class="muted">{{ site.tagline | replace(" x ", " <b class='x'>x</b> ") | safe }}</p>
+      </div>
+      <div class="foot-links">
+        {% if site.social.facebook %}<a href="{{ site.social.facebook }}" rel="noopener">Facebook</a>{% endif %}
+        {% if site.social.youtube %}<a href="{{ site.social.youtube }}" rel="noopener">YouTube</a>{% endif %}
+        {% if site.social.tiktok %}<a href="{{ site.social.tiktok }}" rel="noopener">TikTok</a>{% endif %}
+        <a href="{{ site.github.discussions }}" rel="noopener">GitHub Discussions</a>
+        <a href="{{ '/feed.xml' | url }}">RSS</a>
+      </div>
+    </div>
+    <p class="wrap muted small">© {{ year }} UXplain · ตัวละครและภาพประกอบทั้งหมดออกแบบขึ้นเอง ไม่เกี่ยวข้องกับแบรนด์ใด</p>
+  </footer>
+  <script src="{{ '/assets/js/site.js' | url }}" defer></script>
+</body>
+</html>

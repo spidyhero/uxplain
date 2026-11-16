@@ -1,0 +1,28 @@
+{
+  "title": "UXplain",
+  "readAs": "ยู เอ็กซ์ เพลน",
+  "slogan": "UX ยาก? เดี๋ยว x เพลนให้",
+  "tagline": "จากจอ ถึงสมอง · x เพลนให้หมด",
+  "description": "งานวิจัย UX/UI & HCI สุดล้ำ ย่อยเป็นคลิปสั้นและบทความอ่านง่าย พร้อมพื้นที่ให้มาคุยกัน",
+  "url": "https://spidyhero.github.io",
+  "lang": "th",
+  "schedule": "คลิปใหม่ทุก จันทร์ · พุธ · ศุกร์",
+  "social": {
+    "facebook": "https://www.facebook.com/",
+    "youtube": "",
+    "tiktok": "",
+    "linktree": "https://linktr.ee/spidyhero"
+  },
+  "github": {
+    "repo": "spidyhero/uxplain",
+    "discussions": "https://github.com/spidyhero/uxplain/discussions"
+  },
+  "giscus": {
+    "repo": "spidyhero/uxplain",
+    "repoId": "",
+    "category": "Announcements",
+    "categoryId": "",
+    "boardCategory": "Q&A",
+    "boardCategoryId": ""
+  }
+}

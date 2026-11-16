@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: pillars
+  size: 1
+  alias: p
+permalink: "/topics/{{ p.key }}/"
+eleventyComputed:
+  title: "{{ p.th }}"
+---
+{% set list = collections.posts | byPillar(p.key) %}
+<section class="wrap block page-head">
+  <div class="topic-head" style="--pc: {{ p.color }}">
+    <img src="{{ ('/assets/img/cast/' + p.mascot + '.svg') | url }}" alt="">
+    <div>
+      <p class="muted">{{ p.en }}</p>
+      <h1>{{ p.th }}</h1>
+      <p>{{ p.blurb }}</p>
+    </div>
+  </div>
+  {% if list.length %}
+  <div class="grid">{% for post in list %}{% include "partials/card.njk" %}{% endfor %}</div>
+  {% else %}
+  <p class="muted">ยังไม่มีโพสต์ในหมวดนี้ — <a href="{{ '/community/' | url }}">เสนอหัวข้อ</a>ให้เราได้เลย</p>
+  {% endif %}
+</section>

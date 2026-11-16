@@ -1,0 +1,4 @@
+{
+  "layout": "layouts/post.njk",
+  "permalink": "/{{ 'videos' if type == 'video' else 'articles' }}/{{ page.fileSlug }}/"
+}

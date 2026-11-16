@@ -1,0 +1,16 @@
+{% if youtube %}
+<div class="video {{ 'video-vertical' if vertical !== false else '' }}">
+  <iframe src="https://www.youtube-nocookie.com/embed/{{ youtube | youtubeId }}?rel=0" title="{{ title }}" loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+{% elif facebook %}
+<div class="video {{ 'video-vertical' if vertical !== false else '' }}">
+  <iframe src="https://www.facebook.com/plugins/video.php?href={{ facebook | encode }}&show_text=false" title="{{ title }}" loading="lazy"
+    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+{% else %}
+<div class="video video-vertical video-empty">
+  <img src="{{ ('/assets/img/cast/' + ((pillar | pillar).mascot) + '.svg') | url }}" alt="">
+  <p>คลิปกำลังจะมา… ใส่ลิงก์ YouTube หรือ Facebook ในหัวโพสต์ได้เลย</p>
+</div>
+{% endif %}

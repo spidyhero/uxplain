@@ -1,0 +1,9 @@
+[
+  { "key": "screen",   "th": "หน้าจอ / UI",        "en": "Screen & UI",        "color": "#EC2D87", "mascot": "pixo",   "blurb": "ปุ่ม เมนู ฟอร์ม และทุกอย่างบนจอที่ทำให้เราใช้ง่ายหรือหงุดหงิด" },
+  { "key": "ai",       "th": "คุยกับ AI",          "en": "AI Interaction",     "color": "#6A3FA0", "mascot": "bubbi",  "blurb": "แชตบอต ผู้ช่วย AI และวิธีที่คนกับ AI ทำงานร่วมกัน" },
+  { "key": "voice",    "th": "เสียง",              "en": "Voice & Sound",      "color": "#FFD93B", "mascot": "voxi",   "blurb": "สั่งงานด้วยเสียง ลำโพงอัจฉริยะ และเสียงที่ออกแบบมาให้เข้าใจ" },
+  { "key": "physical", "th": "สัมผัส / จับต้องได้", "en": "Physical & Haptics", "color": "#EF4136", "mascot": "hapti",  "blurb": "การสั่น การสัมผัส อุปกรณ์สวมใส่ และวัตถุที่เปลี่ยนรูปร่างได้" },
+  { "key": "xr",       "th": "AR · VR",            "en": "XR / Spatial",       "color": "#2DBE6C", "mascot": "visor",  "blurb": "โลกเสมือน โลกผสม และการโต้ตอบในพื้นที่สามมิติ" },
+  { "key": "brain",    "th": "สมอง & ร่างกาย",      "en": "Brain & Body",       "color": "#C4E538", "mascot": "neura",  "blurb": "คลื่นสมอง สัญญาณร่างกาย และอินเทอร์เฟซที่อ่านใจ (เกือบ) ได้" },
+  { "key": "access",   "th": "เข้าถึงได้ & จริยธรรม", "en": "Access & Ethics",   "color": "#12B3A8", "mascot": "glitch", "blurb": "ออกแบบเพื่อทุกคน ความเป็นส่วนตัว และ dark pattern ที่ต้องระวัง" }
+]

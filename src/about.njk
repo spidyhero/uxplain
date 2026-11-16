@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+title: เกี่ยวกับ
+permalink: /about/
+---
+<section class="wrap-narrow block page-head">
+  <h1>เกี่ยวกับ UXplain</h1>
+  <p class="lede"><b>UXplain</b> (อ่านว่า “{{ site.readAs }}”) มาจาก UX + explain — เราหยิบงานวิจัยด้าน UX/UI และ HCI (Human-Computer Interaction) ที่ใหม่และน่าสนใจ มาเล่าใหม่เป็นคลิป motion graphic สั้น ๆ และบทความอ่านง่าย</p>
+  <div class="prose">
+    <ul>
+      <li>📱 ตั้งแต่ดีไซน์บนหน้าจอ</li>
+      <li>🗣️ การคุยกับเสียงและ AI</li>
+      <li>✋ การสัมผัสและการเคลื่อนไหว</li>
+      <li>🧠 ไปจนถึงการเชื่อมสมองกับคอมพิวเตอร์</li>
+    </ul>
+    <p>เหมาะกับนักเรียน นักศึกษา นักวิจัย และทุกคนที่อยากรู้ว่าเทคโนโลยีเข้าใจคนได้ยังไง</p>
+    <p>🎬 {{ site.schedule }}</p>
+    <p class="pill-slogan small-pill">จากจอ ถึงสมอง · <b class="x">x</b> เพลนให้หมด</p>
+    <h2>ติดต่อ</h2>
+    <p><a href="{{ site.social.linktree }}">{{ site.social.linktree | replace("https://", "") }}</a></p>
+  </div>
+  <img class="about-cast" src="{{ '/assets/img/cover.png' | url }}" alt="ตัวละคร UXplain">
+</section>

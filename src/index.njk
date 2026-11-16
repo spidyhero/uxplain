@@ -1,0 +1,66 @@
+---
+layout: layouts/base.njk
+---
+<section class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-text">
+      <h1 class="logo-big" aria-label="UXplain">
+        <img src="{{ '/assets/img/logo-mark.svg' | url }}" alt="" width="200" height="139"><span>plain</span>
+      </h1>
+      <p class="read-as">อ่านว่า “{{ site.readAs }}”</p>
+      <p class="pill-slogan">UX ยาก? เดี๋ยว <b class="x">x</b> เพลนให้</p>
+      <p class="hero-sub">{{ site.description }}</p>
+      <div class="cta-row">
+        <a class="btn btn-ink" href="{{ '/videos/' | url }}">▶ ดูคลิป</a>
+        <a class="btn btn-line" href="{{ '/community/' | url }}">💬 เข้าคอมมูนิตี้</a>
+      </div>
+      <p class="muted small">🎬 {{ site.schedule }}</p>
+    </div>
+    <div class="hero-cast" aria-hidden="true">
+      {% for m in ["pixo", "bubbi", "voxi", "hapti", "visor", "neura", "glitch"] %}
+      <img class="c c{{ loop.index }}" src="{{ ('/assets/img/cast/' + m + '.svg') | url }}" alt="">
+      {% endfor %}
+      <span class="deco sun"></span><span class="deco ring"></span><span class="deco cross">+</span>
+    </div>
+  </div>
+</section>
+
+{% set videos = collections.posts | byType("video") %}
+{% set articles = collections.posts | byType("article") %}
+
+<section class="wrap block">
+  <div class="block-head"><h2>คลิปล่าสุด</h2><a href="{{ '/videos/' | url }}">ดูทั้งหมด →</a></div>
+  {% if videos.length %}
+  <div class="grid grid-video">{% for post in videos | limit(4) %}{% include "partials/card.njk" %}{% endfor %}</div>
+  {% else %}<p class="muted">ยังไม่มีคลิป</p>{% endif %}
+</section>
+
+<section class="wrap block">
+  <div class="block-head"><h2>บทความล่าสุด</h2><a href="{{ '/articles/' | url }}">ดูทั้งหมด →</a></div>
+  {% if articles.length %}
+  <div class="grid">{% for post in articles | limit(3) %}{% include "partials/card.njk" %}{% endfor %}</div>
+  {% else %}<p class="muted">ยังไม่มีบทความ</p>{% endif %}
+</section>
+
+<section class="wrap block">
+  <div class="block-head"><h2>จากจอ ถึงสมอง · 7 หมวด</h2><a href="{{ '/topics/' | url }}">ดูทุกหมวด →</a></div>
+  <div class="pillars">
+    {% for p in pillars %}
+    <a class="pillar" href="{{ ('/topics/' + p.key + '/') | url }}" style="--pc: {{ p.color }}">
+      <img src="{{ ('/assets/img/cast/' + p.mascot + '.svg') | url }}" alt="">
+      <b>{{ p.th }}</b><span>{{ p.en }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="wrap block">
+  <div class="community-cta">
+    <img src="{{ '/assets/img/cast/bubbi.svg' | url }}" alt="">
+    <div>
+      <h2>มีคำถามเรื่อง UX/UI หรือ HCI?</h2>
+      <p>ตั้งกระทู้ถาม แชร์งานวิจัยที่เจอ หรือเสนอหัวข้อให้เรา x เพลนในคลิปหน้า</p>
+      <a class="btn btn-ink" href="{{ '/community/' | url }}">ไปที่บอร์ดคอมมูนิตี้ →</a>
+    </div>
+  </div>
+</section>

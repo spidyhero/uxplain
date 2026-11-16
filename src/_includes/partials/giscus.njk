@@ -1,0 +1,26 @@
+{# giscus = ระบบคอมเมนต์ที่เก็บข้อมูลใน GitHub Discussions
+   ตัวแปร: gTerm (ชื่อเธรด), gCategory, gCategoryId #}
+{% if site.giscus.repoId and gCategoryId %}
+<div class="giscus-wrap">
+  <script src="https://giscus.app/client.js"
+    data-repo="{{ site.giscus.repo }}"
+    data-repo-id="{{ site.giscus.repoId }}"
+    data-category="{{ gCategory }}"
+    data-category-id="{{ gCategoryId }}"
+    {% if gTerm %}data-mapping="specific" data-term="{{ gTerm }}"{% else %}data-mapping="pathname"{% endif %}
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="th"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+</div>
+{% else %}
+<div class="notice">
+  <b>ยังไม่ได้เปิดระบบคอมเมนต์</b> — ทำตามขั้นตอน “ตั้งค่า giscus” ใน README แล้วใส่ <code>repoId</code> / <code>categoryId</code> ลงใน <code>src/_data/site.json</code>
+  <br>ระหว่างนี้คุยกันได้ที่ <a href="{{ site.github.discussions }}">GitHub Discussions</a>
+</div>
+{% endif %}
