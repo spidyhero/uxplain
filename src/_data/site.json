@@ -26,7 +26,7 @@
     "boardCategoryId": ""
   },
   "supabase": {
-    "url": "",
-    "anonKey": ""
+    "url": "https://znirpodehaumlxnghkyf.supabase.co",
+    "anonKey": "sb_publishable_zYkGjO30q9OFymw6sYegFQ_ptmP2uTk"
   }
 }
