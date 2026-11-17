@@ -200,3 +200,49 @@ h2{font-weight:800;font-size:clamp(22px,3vw,28px)}
 .admin-list li{background:#fff;border-radius:16px;padding:14px 18px}
 .admin-list p{margin:2px 0;white-space:pre-wrap}
 .acts{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+
+/* ===== article infographic blocks (ux-*) — used inside .prose ===== */
+.ux-tldr{background:var(--ink);color:#fff;border-radius:var(--r);padding:20px 24px;margin:1.2em 0}
+.ux-tldr p{margin:0}.ux-tldr b{color:var(--yellow)}
+.ux-toc{display:flex;flex-wrap:wrap;gap:8px;margin:1em 0 1.6em}
+.ux-toc a{text-decoration:none;font-weight:600;font-size:15px;background:#fff;border:2px solid var(--ink);color:var(--ink);border-radius:99px;padding:3px 14px}
+.ux-toc a:hover{background:var(--yellow)}
+.prose h2[id]{scroll-margin-top:80px}
+.ux-cols2,.ux-cols3{display:grid;gap:14px;margin:1.2em 0}
+.ux-cols2{grid-template-columns:1fr 1fr}.ux-cols3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:640px){.ux-cols2,.ux-cols3{grid-template-columns:1fr}}
+.ux-box,.ux-card{background:#fff;border-radius:var(--r);padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0;font-size:16px;line-height:1.6}
+.ux-card h3{font-size:19px;margin:0}.ux-card p{margin:0}
+.ux-third{border:3px dashed var(--red)}
+.ux-box small{font-weight:700;font-size:13px;letter-spacing:.04em;color:var(--indigo)}
+.ux-big{font-weight:900;font-size:40px;line-height:1.15}
+.ux-pipe{display:grid;grid-template-columns:1fr 36px 1fr;gap:8px;margin:1em 0}
+.ux-arrow{display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:var(--indigo)}
+@media (max-width:640px){.ux-pipe{grid-template-columns:1fr}.ux-arrow{transform:rotate(90deg);height:28px}}
+.ux-tag{align-self:flex-start;background:var(--ink);color:var(--yellow);font-weight:700;font-size:13px;border-radius:99px;padding:2px 12px}
+.ux-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:1.2em 0}
+@media (max-width:640px){.ux-stats{grid-template-columns:1fr 1fr}}
+.ux-stats>div{background:#fff;border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;font-size:14px;line-height:1.5;color:var(--muted)}
+.ux-stats .n{font-weight:900;font-size:clamp(32px,5vw,42px);line-height:1.2;color:var(--ink);font-variant-numeric:tabular-nums}
+.ux-ftitle{font-weight:700;font-size:17px;margin:0 0 4px}
+.ux-note{font-size:13px;color:var(--muted);margin:4px 0 0}
+.ux-bars{display:flex;flex-direction:column;gap:8px}
+.ux-bars>div{display:grid;grid-template-columns:minmax(110px,42%) 1fr;gap:10px;align-items:center;font-size:14.5px;line-height:1.4}
+.ux-bars b{position:relative;height:28px;background:#E9EBF0;border-radius:0 4px 4px 0;font-size:14px;line-height:28px;padding-left:calc(var(--v) * .8 + 8px);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ux-bars b::before{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(var(--v) * .8);background:var(--indigo);border-radius:0 4px 4px 0}
+.ux-bars b.hl::before{background:var(--red)}
+.ux-split{display:flex;gap:2px;height:40px;border-radius:6px;overflow:hidden;margin:6px 0}
+.ux-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;margin:0}
+.ux-legend span{display:inline-flex;align-items:center;gap:6px}
+.ux-legend i{width:14px;height:14px;border-radius:3px;display:inline-block}
+.ux-ev{font-size:14px;line-height:1.6;background:var(--bg);border-radius:12px;padding:8px 12px;color:#3d4048}
+.ux-dodont{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:14px;line-height:1.5}
+.ux-dodont div{border-radius:12px;padding:8px 10px}.ux-dodont b{display:block}
+.ux-dodont .do{background:#EEF7D0}.ux-dodont .dont{background:#FDE3E1}
+.ux-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ux-chips span{font-size:13.5px;border:2px solid var(--ink);border-radius:99px;padding:1px 10px;background:#fff}
+.ux-table{overflow-x:auto;margin:1em 0}
+.ux-table table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px;line-height:1.5;background:#fff;border-radius:var(--r);overflow:hidden}
+.ux-table th{background:var(--ink);color:#fff;text-align:left;padding:10px 12px;font-size:14px}
+.ux-table td{padding:10px 12px;border-top:2px solid var(--bg);vertical-align:top}
+.ux-table td.num{font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
