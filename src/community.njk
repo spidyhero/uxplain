@@ -8,20 +8,32 @@ permalink: /community/
   <p class="lede">พื้นที่ถาม-ตอบ แชร์งานวิจัย และเสนอหัวข้อให้เรา x เพลน สำหรับนักเรียน นักศึกษา นักวิจัย และทุกคนที่สนใจ UX/UI & HCI</p>
 
   <div class="how">
-    <div><b>1</b><p>ล็อกอินด้วยบัญชี GitHub (สมัครฟรี)</p></div>
-    <div><b>2</b><p>พิมพ์คำถามหรือความเห็นในกล่องด้านล่าง</p></div>
-    <div><b>3</b><p>อยากตั้งกระทู้แยก? เปิด <a href="{{ site.github.discussions }}">บอร์ดเต็ม</a></p></div>
+    <div><b>1</b><p>ใส่ชื่อเล่น ไม่ต้องล็อกอิน ไม่ต้องสมัคร</p></div>
+    <div><b>2</b><p>เลือกหัวข้อด้านล่าง แล้วพิมพ์คำถามหรือความเห็น</p></div>
+    <div><b>3</b><p>ทีมงานตรวจแล้วข้อความจะขึ้นบนกระดาน</p></div>
   </div>
 
   <div class="board-cats">
-    <a href="{{ site.github.discussions }}/categories/q-a" style="--pc:#6A3FA0">🙋 ถาม-ตอบ<small>สงสัยเรื่อง UX/HCI ถามได้เลย</small></a>
-    <a href="{{ site.github.discussions }}/categories/ideas" style="--pc:#F7931E">💡 เสนอหัวข้อ<small>อยากให้ทำคลิปเรื่องอะไร</small></a>
-    <a href="{{ site.github.discussions }}/categories/show-and-tell" style="--pc:#2DBE6C">🧪 แชร์งาน<small>งานวิจัย/โปรเจกต์ของคุณ</small></a>
+    <a href="#board" data-prefix="[ถาม-ตอบ] " style="--pc:#6A3FA0">🙋 ถาม-ตอบ<small>สงสัยเรื่อง UX/HCI ถามได้เลย</small></a>
+    <a href="#board" data-prefix="[เสนอหัวข้อ] " style="--pc:#F7931E">💡 เสนอหัวข้อ<small>อยากให้ทำคลิปเรื่องอะไร</small></a>
+    <a href="#board" data-prefix="[แชร์งาน] " style="--pc:#2DBE6C">🧪 แชร์งาน<small>งานวิจัย/โปรเจกต์ของคุณ</small></a>
   </div>
 
-  <h2>กระดานรวม</h2>
-  {% set gTerm = "UXplain Community Board" %}{% set gCategory = site.giscus.boardCategory %}{% set gCategoryId = site.giscus.boardCategoryId %}
-  {% include "partials/giscus.njk" %}
+  <h2 id="board">กระดานรวม</h2>
+  <div data-post-slug="community">
+    {% include "partials/comments.njk" %}
+  </div>
+  <script>
+    // ปุ่มหัวข้อ: ใส่ป้ายหัวข้อไว้หน้าข้อความ แล้วเลื่อนไปที่กล่องพิมพ์
+    document.querySelectorAll(".board-cats [data-prefix]").forEach((a) => a.addEventListener("click", (e) => {
+      const ta = document.querySelector("[data-cform] textarea");
+      if (!ta || document.querySelector("[data-cform]").hidden) return;
+      e.preventDefault();
+      ta.value = a.dataset.prefix + ta.value.replace(/^\[[^\]]+\]\s*/, "");
+      ta.dispatchEvent(new Event("input"));
+      ta.scrollIntoView({ behavior: "smooth", block: "center" }); ta.focus();
+    }));
+  </script>
 
   <div class="rules">
     <h2>กติกาสั้น ๆ</h2>
