@@ -5,7 +5,7 @@ type: video
 episode: 1
 pillar: ai
 excerpt: "มีข้อความลับที่พูดกับ AI ก่อนคุณเสมอ งานวิจัยรางวัลยอดเยี่ยมจาก CHI 2026 ถามผู้ใช้ 109 คนว่าอยากเห็นและอยากควบคุมมันแค่ไหน"
-youtube: ""
+youtube: "https://youtube.com/shorts/sbZF781VDpY"
 vertical: true
 question: "คุณอยากได้ “ปุ่มตั้งค่า” หรือ “แก้เองทั้งหมด”? คอมเมนต์บอกหน่อย 👇"
 source:
